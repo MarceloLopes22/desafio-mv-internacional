@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { FormsModule }   from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {HttpClientModule} from '@angular/common/http';
@@ -13,6 +13,7 @@ import { ProdutoListarComponent } from './componentes/produto-listar/produto-lis
 import { ProdutoService } from './servicos/produto.service';
 import { DialogService } from './servicos/dialog.service';
 import { ProdutoDetalharComponent } from './componentes/produto-detalhar/produto-detalhar.component';
+import { ProdutoNovoComponent } from './componentes/produto-novo/produto-novo.component';
 
 
 @NgModule({
@@ -23,13 +24,15 @@ import { ProdutoDetalharComponent } from './componentes/produto-detalhar/produto
     HomeComponent,
     MenuComponent,
     ProdutoListarComponent,
-    ProdutoDetalharComponent
+    ProdutoDetalharComponent,
+    ProdutoNovoComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     routes,
     HttpClientModule,
+    FormsModule,
   ],
   providers: [ProdutoService, DialogService],
   bootstrap: [AppComponent]

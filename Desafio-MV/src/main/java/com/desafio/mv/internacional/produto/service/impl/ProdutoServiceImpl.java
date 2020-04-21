@@ -1,5 +1,6 @@
 package com.desafio.mv.internacional.produto.service.impl;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import com.desafio.mv.internacional.produto.basica.Produto;
 import com.desafio.mv.internacional.produto.controller.response.Response;
@@ -25,6 +27,12 @@ public class ProdutoServiceImpl implements ProdutoService {
 	public ResponseEntity<Response<Produto>> salvar(Produto produto) {
 		Response<Produto> response = new Response<Produto>();
 		
+		validarCampos(produto, response);
+		
+		if (!response.getErros().isEmpty()) {
+			return new ResponseEntity<Response<Produto>>(response, HttpStatus.BAD_REQUEST);
+		}
+		
 		produto = repositorio.save(produto);
 		
 		response.setData(produto);
@@ -33,10 +41,22 @@ public class ProdutoServiceImpl implements ProdutoService {
 		
 		return new ResponseEntity<Response<Produto>>(response, HttpStatus.OK);
 	}
+
+	private void validarCampos(Produto produto, Response<Produto> response) {
+		if (produto == null || StringUtils.isEmpty(produto.getNome()) || produto.getValor().equals(BigDecimal.ZERO)) {
+			response.getErros().add("Preencha pelo menos o nome e valor");
+		}
+	}
 	
 	@Override
 	public ResponseEntity<Response<Produto>> editar(Produto produto) {
 		Response<Produto> response = new Response<Produto>();
+		
+		validarCampos(produto, response);
+		
+		if (!response.getErros().isEmpty()) {
+			return new ResponseEntity<Response<Produto>>(response, HttpStatus.BAD_REQUEST);
+		}
 		
 		produto = repositorio.save(produto);
 		

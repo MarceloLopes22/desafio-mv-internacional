@@ -12,7 +12,7 @@ export class ProdutoService {
 
   salvarOrAtualizar(produto: Produto) {
     if(produto.id != null && produto.id > 0) {
-      return this.http.put(`${PRODUTO_API}/api/produto/atualizar`, produto);
+      return this.http.put(`${PRODUTO_API}/api/produto/editar`, produto);
     }
     return this.http.post(`${PRODUTO_API}/api/produto/salvar`, produto);
   }
