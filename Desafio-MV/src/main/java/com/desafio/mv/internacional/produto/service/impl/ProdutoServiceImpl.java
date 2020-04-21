@@ -44,7 +44,7 @@ public class ProdutoServiceImpl implements ProdutoService {
 	}
 
 	private void validarCampos(Produto produto, Response<Produto> response) {
-		if (produto == null || StringUtils.isEmpty(produto.getNome()) || produto.getValor().equals(BigDecimal.ZERO)) {
+		if (produto == null || produto.getValor() == null || StringUtils.isEmpty(produto.getNome()) || produto.getValor().equals(BigDecimal.ZERO)) {
 			response.getErros().add("Preencha pelo menos o nome e valor");
 		}
 	}
