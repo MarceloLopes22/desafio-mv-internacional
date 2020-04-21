@@ -146,6 +146,51 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "http://localhost:8081/api/produto/atualizarProdutos/10",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/api/produto/atualizarProdutos/10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"produto",
+						"atualizarProdutos",
+						"10"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8081/api/produto/atualizarProdutos/21/99",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/api/produto/atualizarProdutos/21/99",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"produto",
+						"atualizarProdutos",
+						"21",
+						"99"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"protocolProfileBehavior": {}
