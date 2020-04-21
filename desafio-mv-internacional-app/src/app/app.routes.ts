@@ -1,14 +1,16 @@
 import { Routes, RouterModule } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
 import { HomeComponent } from './componentes/home/home.component';
+import { ProdutoListarComponent } from './componentes/produto-listar/produto-listar.component';
 
 export const ROUTES: Routes = [
     
+    {path: '', component: HomeComponent},
     {path: 'home', component: HomeComponent},
-    /*{path: 'pessoa-lista', component: PessoaListarComponent},
-    {path: 'pessoa-novo', component: PessoaNovoComponent},
-    {path: 'pessoa-novo/:id', component: PessoaNovoComponent},
-    {path: 'detalhar-pessoa/:id', component: PessoaDetalharComponent},*/
+    {path: 'produto-lista', component: ProdutoListarComponent},
+    /*{path: 'produto-novo', component: ProdutoNovoComponent},
+    {path: 'produto-novo/:id', component: ProdutoNovoComponent},
+    {path: 'detalhar-produto/:id', component: ProdutoDetalharComponent},*/
 ]
 
 export const routes: ModuleWithProviders = RouterModule.forRoot(ROUTES);

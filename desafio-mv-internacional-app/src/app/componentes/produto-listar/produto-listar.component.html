@@ -1,0 +1,49 @@
+<div [ngClass]="classCss" role="alert" *ngIf="menssage">
+    <strong>{{menssage.text}}</strong>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="box">
+            <div class="box-header with-border">
+                <h3 class="box-title">Listar Produtos</h3>
+            </div>
+            <div class="box-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Descrição</th>
+                            <th>Valor</th>
+                            <th style="width: 10px">&nbsp;</th>
+                            <th style="width: 10px">&nbsp;</th>
+                            <th style="width: 10px">&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let p of listaProdutos">
+                            <td>{{p.nome}}</td>
+                            <td>{{p.descricao}}</td>
+                            <td>{{p.valor | currency:"BRL":"symbol"}}</td>
+                            <td><button class="btn btn-primary" (click)="editar(p.id)">Editar</button></td>
+                            <td><button class="btn btn-danger" (click)="apagar(p.id)">Excluir</button></td>
+                            <td><button class="btn btn-success" (click)="detalhar(p.id)">Detalhar</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="box-footer clearfix">
+                <ul class="pagination pagination-sm no-margin pull-right">
+                    <li>
+                        <a (click)="setPreviousPagina($event)">&laquo;</a>
+                    </li>
+                    <li *ngFor="let p of pages; let i=index">
+                        <a [ngClass]="{'pagination-focus' : i == page}" (click)="setPagina(i, $event)">{{i+1}}</a>
+                    </li>
+                    <li>
+                        <a (click)="setNextPagina($event)">&raquo;</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

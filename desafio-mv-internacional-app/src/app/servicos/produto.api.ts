@@ -1,0 +1,1 @@
+export const PRODUTO_API: string = "http://localhost:8081";

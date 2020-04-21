@@ -17,7 +17,7 @@ import com.desafio.mv.internacional.produto.basica.Produto;
 import com.desafio.mv.internacional.produto.controller.response.Response;
 import com.desafio.mv.internacional.produto.service.ProdutoService;
 
-@CrossOrigin(value = "*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/api/produto/")
 public class ProdutoController {
@@ -26,7 +26,7 @@ public class ProdutoController {
 	private ProdutoService service;
 	
 	@RequestMapping(value = "salvar", method = RequestMethod.POST)
-	public ResponseEntity<Response<Produto>> salvarOrEditar(@RequestBody Produto produto) {
+	public ResponseEntity<Response<Produto>> salvar(@RequestBody Produto produto) {
 		return this.service.salvar(produto);
 	}
 
