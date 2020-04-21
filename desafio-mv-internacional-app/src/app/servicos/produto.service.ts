@@ -1,3 +1,4 @@
+import { AtributoDto } from './../modelo/atributoDto.model';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Produto } from '../modelo/produto.model';
@@ -29,11 +30,11 @@ export class ProdutoService {
     return this.http.delete(`${PRODUTO_API}/api/produto/remover/${id}`);
   }
   
-  atualizarProdutos(percentual:number) {
-    return this.http.put(`${PRODUTO_API}/api/produto/atualizarProdutos/`,percentual);
+  atualizarProdutos(atributoDto:AtributoDto) {
+    return this.http.put(`${PRODUTO_API}/api/produto/atualizarProdutos/`, atributoDto);
   }
   
-  atualizarValorProdutos(id:number, percentual:number) {
-    return this.http.put(`${PRODUTO_API}/api/produto/atualizarProdutos/`,[id, percentual]);
+  atualizarValorProduto(atributoDto:AtributoDto) {
+    return this.http.put(`${PRODUTO_API}/api/produto/atualizarProduto/`,atributoDto);
   }
 }

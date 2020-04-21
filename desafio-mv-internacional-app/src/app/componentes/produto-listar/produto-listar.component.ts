@@ -68,6 +68,10 @@ export class ProdutoListarComponent implements OnInit {
     this.router.navigate(['/detalhar-produto',id]);
   }
 
+  atualizarValor(id:string){
+    this.router.navigate(['/atualizar-valor-produto',id]);
+  }
+
   setNextPagina(event:any) {
     event.preventDefault(); // evitar reload na tela
     if(this.page+1 < this.pages.length) {

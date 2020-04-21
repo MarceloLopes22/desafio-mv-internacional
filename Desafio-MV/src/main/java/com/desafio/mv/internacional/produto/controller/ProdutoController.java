@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.desafio.mv.internacional.produto.basica.Produto;
+import com.desafio.mv.internacional.produto.basica.dtos.AtributoDto;
 import com.desafio.mv.internacional.produto.controller.response.Response;
 import com.desafio.mv.internacional.produto.service.ProdutoService;
 
@@ -51,14 +52,13 @@ public class ProdutoController {
 		return this.service.listar(page, count);
 	}
 
-	@RequestMapping(value = "atualizarProdutos/{percentual}", method = RequestMethod.PUT)
-	public ResponseEntity<Response<Produto>> atualizarProdutos(@PathVariable(name = "percentual") Double percentual) {
-		return this.service.atualizarProdutos(percentual);
+	@RequestMapping(value = "atualizarProdutos", method = RequestMethod.PUT)
+	public ResponseEntity<Response<Produto>> atualizarProdutos(@RequestBody AtributoDto atributoDto) {
+		return this.service.atualizarProdutos(atributoDto);
 	}
 
-	@RequestMapping(value = "atualizarProdutos/{id}/{percentual}", method = RequestMethod.PUT)
-	public ResponseEntity<Response<Produto>> atualizarProdutos(@PathVariable(name = "id") Integer id, 
-			@PathVariable(name = "percentual") Double percentual) {
-		return this.service.atualizarProdutos(id, percentual);
+	@RequestMapping(value = "atualizarProduto", method = RequestMethod.PUT)
+	public ResponseEntity<Response<Produto>> atualizarProduto(@RequestBody AtributoDto atributoDto) {
+		return this.service.atualizarProduto(atributoDto);
 	}
 }

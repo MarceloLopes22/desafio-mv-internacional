@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import com.desafio.mv.internacional.produto.basica.Produto;
+import com.desafio.mv.internacional.produto.basica.dtos.AtributoDto;
 import com.desafio.mv.internacional.produto.controller.response.Response;
 import com.desafio.mv.internacional.produto.repositorio.ProdutoRepository;
 import com.desafio.mv.internacional.produto.service.ProdutoService;
@@ -119,48 +120,52 @@ public class ProdutoServiceImpl implements ProdutoService {
 	}
 
 	@Override
-	public ResponseEntity<Response<Produto>> atualizarProdutos(Integer id, Double percentual) {
+	public ResponseEntity<Response<Produto>> atualizarProduto(AtributoDto atributoDto) {
 		Response<Produto> response = new Response<Produto>();
 		
-		response = validarValorPercentual(percentual, response);
+		response = validarValorPercentual(atributoDto, response);
 		
 		if (response != null && !response.getErros().isEmpty()) {
 			return new ResponseEntity<Response<Produto>>(response, response.getHttpStatus());
 		} 
 		
-		Optional<Produto> pesquisarPor = repositorio.findById(id);
+		Optional<Produto> pesquisarPor = repositorio.findById(atributoDto.getId());
 		
 		if(!pesquisarPor.isPresent()) {
 			response.getErros().add("O produto informado não existe.");
 			response.setHttpStatus(HttpStatus.BAD_REQUEST);
 			return new ResponseEntity<Response<Produto>>(response, response.getHttpStatus());
 		} else {
-			repositorio.atualizarProdutos(id, percentual);
+			repositorio.atualizarProdutos(atributoDto.getId(), atributoDto.getPercentual());
 			response.setHttpStatus(HttpStatus.OK);
-			response.setMensagemSucesso("Procedure executada com sucesso.");
+			response.setMensagemSucesso("Produto atualizado com sucesso.");
 		}
 		return new ResponseEntity<Response<Produto>>(response, response.getHttpStatus());
 	}
 
 	@Override
-	public ResponseEntity<Response<Produto>> atualizarProdutos(Double percentual) {
+	public ResponseEntity<Response<Produto>> atualizarProdutos(AtributoDto atributoDto) {
 		Response<Produto> response = new Response<Produto>();
 		
-		Response<Produto> validarValorPercentual = validarValorPercentual(percentual, response);
+		Response<Produto> validarValorPercentual = validarValorPercentual(atributoDto, response);
 		
 		if (validarValorPercentual != null && !validarValorPercentual.getErros().isEmpty()) {
 			return new ResponseEntity<Response<Produto>>(response, response.getHttpStatus());
 		} else {
-			repositorio.atualizarProdutos(percentual);
+			repositorio.atualizarProdutos(atributoDto.getPercentual());
 			response.setHttpStatus(HttpStatus.OK);
-			response.setMensagemSucesso("Procedure executada com sucesso.");
+			response.setMensagemSucesso("Produtos atualizados com sucesso.");
 		}
 		return new ResponseEntity<Response<Produto>>(response, response.getHttpStatus());
 	}
 	
-	public Response<Produto> validarValorPercentual(Double percentual, Response<Produto> response) {
+	public Response<Produto> validarValorPercentual(AtributoDto atributoDto, Response<Produto> response) {
 		
-		if (percentual != null && (Double.isInfinite(percentual) || Double.isNaN(percentual) || Double.MAX_VALUE == percentual)) {
+		if (atributoDto.getPercentual() == null) {
+			response.getErros().add("Valor do percentual é obrigatorio.");
+			response.setHttpStatus(HttpStatus.BAD_REQUEST);
+		} else if (atributoDto != null && (Double.isInfinite(atributoDto.getPercentual()) || Double.isNaN(atributoDto.getPercentual()) 
+				|| Double.MAX_VALUE == atributoDto.getPercentual())) {
 			response.getErros().add("Valor do percentual invalido");
 			response.setHttpStatus(HttpStatus.BAD_REQUEST);
 		}

@@ -14,6 +14,7 @@ import { ProdutoService } from './servicos/produto.service';
 import { DialogService } from './servicos/dialog.service';
 import { ProdutoDetalharComponent } from './componentes/produto-detalhar/produto-detalhar.component';
 import { ProdutoNovoComponent } from './componentes/produto-novo/produto-novo.component';
+import { AtualizarValorProdutoComponent } from './componentes/atualizar-valor-produto/atualizar-valor-produto.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { ProdutoNovoComponent } from './componentes/produto-novo/produto-novo.co
     MenuComponent,
     ProdutoListarComponent,
     ProdutoDetalharComponent,
-    ProdutoNovoComponent
+    ProdutoNovoComponent,
+    AtualizarValorProdutoComponent
   ],
   imports: [
     BrowserModule,

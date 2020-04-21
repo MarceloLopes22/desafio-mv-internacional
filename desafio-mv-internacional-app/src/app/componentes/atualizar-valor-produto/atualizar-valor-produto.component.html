@@ -1,0 +1,54 @@
+<div  class="col-md-12" style="margin-left: 0%">
+    <div class="box box-info">
+        <div class="box-header with-border">
+             <h3 class="box-title">Formulario de atualização de valores</h3>
+        </div>
+        <div class="container">
+            <div class="row col-sm-10">
+                <form class="form-horizontal" #form="ngForm" (ngSubmit)="atualizar()">
+                    <div class="alert alert-error" role="alert" *ngIf="erros != null && erros.length > 0">
+                        <div *ngFor="let e of erros">
+                            <br/><strong>{{e}}</strong>
+                        </div>
+                    </div>
+                    <div [ngClass]="classCss" role="alert" *ngIf="menssage != null && menssage.text != ''">
+                        <strong>{{menssage.text}}</strong>
+                    </div>
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label for="inputSimNao" class="col-sm-2 control-label">Atualizar todos registros:</label>
+                            <div class="col-sm-10">
+                                <select name="simNao" #isTodos="ngModel" [(ngModel)]="simNao" class="form-control">
+                                    <option *ngFor="let a of array" 
+                                        id="inputSimNao"
+                                        required
+                                        [value]="a"
+                                        [selected] = "simNao == a">{{a}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div [ngClass]="getFormGroupClass(percentual.invalid, percentual.dirty)">
+                            <label for="inputPercentual" class="col-sm-2 control-label">Percentual *</label>
+                            <div class="col-sm-10">
+                                <input type="number" 
+                                    [(ngModel)]="atributo.percentual"
+                                    class="form-control" 
+                                    id="inputPercentual" 
+                                    name="percentual"
+                                    #percentual="ngModel"
+                                    placeholder="Percentual" required>
+                                <span class="help-block" *ngIf="percentual.invalid && percentual.dirty">
+                                    Percentual é invalido.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-footer">
+                        <button class="btn btn-primary" (click)="voltar()">Voltar</button>
+                        <button type="submit" [disabled]="!form.valid" class="btn btn-info pull-right">Salvar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
