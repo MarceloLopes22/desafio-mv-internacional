@@ -131,7 +131,7 @@ public class ProdutoServiceImpl implements ProdutoService {
 		
 		Optional<Produto> pesquisarPor = repositorio.findById(atributoDto.getId());
 		
-		if(!pesquisarPor.isPresent()) {
+		if(pesquisarPor == null || !pesquisarPor.isPresent()) {
 			response.getErros().add("O produto informado não existe.");
 			response.setHttpStatus(HttpStatus.BAD_REQUEST);
 			return new ResponseEntity<Response<Produto>>(response, response.getHttpStatus());
