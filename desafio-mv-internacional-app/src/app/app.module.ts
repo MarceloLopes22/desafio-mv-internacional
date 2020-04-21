@@ -12,6 +12,7 @@ import { MenuComponent } from './componentes/menu/menu.component';
 import { ProdutoListarComponent } from './componentes/produto-listar/produto-listar.component';
 import { ProdutoService } from './servicos/produto.service';
 import { DialogService } from './servicos/dialog.service';
+import { ProdutoDetalharComponent } from './componentes/produto-detalhar/produto-detalhar.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { DialogService } from './servicos/dialog.service';
     HeaderComponent,
     HomeComponent,
     MenuComponent,
-    ProdutoListarComponent
+    ProdutoListarComponent,
+    ProdutoDetalharComponent
   ],
   imports: [
     BrowserModule,
