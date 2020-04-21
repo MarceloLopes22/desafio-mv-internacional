@@ -74,7 +74,7 @@ public class ProdutoServiceImpl implements ProdutoService {
 		
 		Optional<Produto> optional = repositorio.findById(id);
 		
-		if (optional == null || optional.isEmpty()) {
+		if (optional == null || !optional.isPresent()) {
 			response.setData(optional);
 			response.getErros().add("Nenhum produto encontrado.");
 			response.setHttpStatus(HttpStatus.OK);
