@@ -8,11 +8,25 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedStoredProcedureQuery;
+import javax.persistence.ParameterMode;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.StoredProcedureParameter;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "produto")
+@NamedStoredProcedureQuery(name = "atualizar_produtos", 
+                           procedureName = "produto_package.atualizar_produtos",
+                           parameters = {
+                              @StoredProcedureParameter(mode = ParameterMode.IN, name = "val_percentual", type = Double.class)
+                           })
+@NamedStoredProcedureQuery(name = "atualizar_valor_produto", 
+						   procedureName = "produto_package.atualizar_valor_produto", 
+						   parameters = {
+							  @StoredProcedureParameter(mode = ParameterMode.IN, name = "val_percentual", type = Double.class), 
+							  @StoredProcedureParameter(mode = ParameterMode.IN, name = "produto_id", type = Integer.class) 
+							})
 public class Produto implements Serializable {
 
 	private static final long serialVersionUID = 1L;

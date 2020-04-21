@@ -97,4 +97,54 @@ public class ProdutoServiceImpl implements ProdutoService {
 		response.setHttpStatus(HttpStatus.OK);
 		return new ResponseEntity<Response<Page<List<Produto>>>>(response, response.getHttpStatus());
 	}
+
+	@Override
+	public ResponseEntity<Response<Produto>> atualizarProdutos(Integer id, Double percentual) {
+		Response<Produto> response = new Response<Produto>();
+		
+		response = validarValorPercentual(percentual, response);
+		
+		if (response != null && !response.getErros().isEmpty()) {
+			return new ResponseEntity<Response<Produto>>(response, response.getHttpStatus());
+		} 
+		
+		Optional<Produto> pesquisarPor = repositorio.findById(id);
+		
+		if(!pesquisarPor.isPresent()) {
+			response.getErros().add("O produto informado não existe.");
+			response.setHttpStatus(HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<Response<Produto>>(response, response.getHttpStatus());
+		} else {
+			repositorio.atualizarProdutos(id, percentual);
+			response.setHttpStatus(HttpStatus.OK);
+			response.setMensagemSucesso("Procedure executada com sucesso.");
+		}
+		return new ResponseEntity<Response<Produto>>(response, response.getHttpStatus());
+	}
+
+	@Override
+	public ResponseEntity<Response<Produto>> atualizarProdutos(Double percentual) {
+		Response<Produto> response = new Response<Produto>();
+		
+		Response<Produto> validarValorPercentual = validarValorPercentual(percentual, response);
+		
+		if (validarValorPercentual != null && !validarValorPercentual.getErros().isEmpty()) {
+			return new ResponseEntity<Response<Produto>>(response, response.getHttpStatus());
+		} else {
+			repositorio.atualizarProdutos(percentual);
+			response.setHttpStatus(HttpStatus.OK);
+			response.setMensagemSucesso("Procedure executada com sucesso.");
+		}
+		return new ResponseEntity<Response<Produto>>(response, response.getHttpStatus());
+	}
+	
+	public Response<Produto> validarValorPercentual(Double percentual, Response<Produto> response) {
+		
+		if (percentual != null && (Double.isInfinite(percentual) || Double.isNaN(percentual) || Double.MAX_VALUE == percentual)) {
+			response.getErros().add("Valor do percentual invalido");
+			response.setHttpStatus(HttpStatus.BAD_REQUEST);
+		}
+		
+		return response;
+	}
 }

@@ -19,4 +19,8 @@ public interface ProdutoService {
 	public ResponseEntity<Response<Produto>> remover(Integer id);
 	
 	public ResponseEntity<Response<Page<List<Produto>>>> listar(int page, int count);
+
+	public ResponseEntity<Response<Produto>> atualizarProdutos(Integer id, Double percentual);
+	
+	public ResponseEntity<Response<Produto>> atualizarProdutos(Double percentual);
 }

@@ -50,4 +50,15 @@ public class ProdutoController {
 			@PathVariable(name = "count") int count) {
 		return this.service.listar(page, count);
 	}
+
+	@RequestMapping(value = "atualizarProdutos/{percentual}", method = RequestMethod.PUT)
+	public ResponseEntity<Response<Produto>> atualizarProdutos(@PathVariable(name = "percentual") Double percentual) {
+		return this.service.atualizarProdutos(percentual);
+	}
+
+	@RequestMapping(value = "atualizarProdutos/{id}/{percentual}", method = RequestMethod.PUT)
+	public ResponseEntity<Response<Produto>> atualizarProdutos(@PathVariable(name = "id") Integer id, 
+			@PathVariable(name = "percentual") Double percentual) {
+		return this.service.atualizarProdutos(id, percentual);
+	}
 }
