@@ -18,9 +18,8 @@
                         <div class="form-group">
                             <label for="inputSimNao" class="col-sm-2 control-label">Atualizar todos registros:</label>
                             <div class="col-sm-10">
-                                <select name="simNao" #isTodos="ngModel" [(ngModel)]="simNao" class="form-control">
+                                <select id="inputSimNao" name="simNao" [(ngModel)]="simNao" class="form-control">
                                     <option *ngFor="let a of array" 
-                                        id="inputSimNao"
                                         required
                                         [value]="a"
                                         [selected] = "simNao == a">{{a}}</option>
